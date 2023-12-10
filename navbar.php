@@ -1,0 +1,259 @@
+<?php 
+  session_start();
+  include("conn.php");
+
+  function getProfilePicture() {
+    $customer_id = isset($_SESSION['customer_id']) ? $_SESSION['customer_id'] : null;
+
+    if ($customer_id) {
+      global $conn;
+
+      // User is logged in, retrieve the profile picture from the database
+      $sql = "SELECT customer_profilePic FROM customer WHERE customer_id = $customer_id";
+      $result = mysqli_query($conn, $sql);
+
+      if ($result && mysqli_num_rows($result) > 0) {
+          $row = mysqli_fetch_assoc($result);
+          return 'data:image/png;base64, ' . base64_encode($row['customer_profilePic']);
+      }
+    }
+
+    return '<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:30px;"></i>';
+  }
+
+  $userProfilePicture = getProfilePicture();
+?>
+
+<header id="nav-menu" aria-label="navigation bar">
+  <div class="container">
+    <div class="nav-start">
+      <a class="logo" href="index.php">
+        <img src="assets/images/logo.png" width="128" height="35" alt="Inc Logo"/>
+      </a>
+      <nav class="menu">
+        <ul class="menu-bar">
+          <li><a class="nav-link" href="index.php">Home</a></li>
+          <li>
+            <button
+              class="nav-link dropdown-btn"
+              data-dropdown="dropdown1"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="browse"
+            >
+              Men
+              <i class="bx bx-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="dropdown1" class="dropdown">
+              <ul role="menu">
+                <li class="dropdown-title"> <span class="dropdown-link-title">Categories</span> </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=1">
+                    <img src="./assets/icons/men-top.png" width="17" height="22"/>
+                    Men's Top
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=2">
+                    <img src="./assets/icons/men-bottom.png" width="17" height="22"/>
+                    Men's bottom
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=8">
+                    <img src="./assets/icons/men-shoes.png" width="17" height="22"/>
+                    Men's shoes
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <button
+              class="nav-link dropdown-btn"
+              data-dropdown="dropdown2"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="discover"
+            >
+              Ladies
+              <i class="bx bx-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="dropdown2" class="dropdown">
+              <ul role="menu">
+                <li>
+                  <span class="dropdown-link-title">Categories</span>
+                </li>
+                <li role="menuitem" class="menuItem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=1">
+                    <img src="./assets/icons/ladies-top.png" width="17" height="22"/>
+                    Ladies' Top
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=2">
+                    <img src="./assets/icons/ladies-bottom.png" width="17" height="22"/>
+                    Ladies' Bottom
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=3">
+                    <img src="./assets/icons/ladies-sportwear.png" width="17" height="22"/>
+                    Ladies' Sportwear
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=4">
+                    <img src="./assets/icons/ladies-dress.png" width="17" height="22"/>
+                    Dress
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=5">
+                    <img src="./assets/icons/ladies-blazer.png" width="17" height="22"/>
+                    Ladies' Blazer
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=6">
+                    <img src="./assets/icons/ladies-jacket.png" width="17" height="22"/>
+                    Ladies' Jacket
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=7">
+                    <img src="./assets/icons/ladies-hoodie.png" width="17" height="22"/>
+                    Ladies' Hoodie
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=8">
+                    <img src="./assets/icons/ladies-shoes.png" width="17" height="22"/>
+                    Ladies' Shoes
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=9">
+                    <img src="./assets/icons/ladies-bag.png" width="17" height="22"/>
+                    Ladies' Bag
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li>
+            <button
+              class="nav-link dropdown-btn"
+              data-dropdown="dropdown3"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="browse"
+            >
+              Others
+              <i class="bx bx-chevron-down" aria-hidden="true"></i>
+            </button>
+            <div id="dropdown3" class="dropdown">
+              <ul role="menu">
+                <li class="dropdown-title"> <span class="dropdown-link-title">Categories</span> </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=10">
+                    <img src="./assets/icons/electronics.png" width="17" height="22"/>
+                    Electronics
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=11">
+                    <img src="./assets/icons/button-badge.png" width="17" height="22"/>
+                    Button Badge
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=12">
+                    <img src="./assets/icons/album.png" width="17" height="22"/>
+                    Authorized Album
+                  </a>
+                </li>
+              </ul>
+            </div>
+          </li>
+          <li><a class="nav-link" href="requests.php">Requests</a></li>
+          <li><a class="nav-link" href="contact-us.php">Contact</a></li>
+          <li><a class="nav-link" href="testimonials.php">Testimonials</a></li>
+          <li><a class="nav-link" href="faqs.php">FAQs</a></li>
+        </ul>
+      </nav>
+    </div>
+    <div class="nav-end">
+      <div class="right-container">
+        <form class="search" role="search">
+          <input type="search" name="search" placeholder="Search" />
+          <i class="bx bx-search" aria-hidden="true"></i>
+        </form>
+        <?php
+          if(isset($_SESSION['customer_id'])) { ?>
+            <div class="dropdown-container">
+            <button
+              class="nav-link dropdown-btn"
+              data-dropdown="dropdown4"
+              aria-haspopup="true"
+              aria-expanded="false"
+              aria-label="discover"
+            >
+              <img
+                src="<?php echo $userProfilePicture; ?>"
+                width="30"
+                height="30"
+                alt="user image"
+              />
+              </button>
+              <div id="dropdown4" class="dropdown">
+              <ul role="menu">
+                <li role="menuitem">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=10">
+                    My Account
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <a class="dropdown-link" href="my-order.php">
+                    My Order
+                  </a>
+                </li>
+                <li role="menuitem">
+                  <form action="logout.php">
+                    <button type="submit" style="background-color: red; border-radius: 5px; width: 200px; height: 25px; color: white;">Logout</submit>
+                  </form>
+                </li>
+              </ul>
+            </div>
+          </div>
+        <?php 
+        } else {
+        ?> 
+          <a href="login.php">
+            <?php echo $userProfilePicture; ?>
+          </a>
+        <?php  
+        }
+        ?>
+        <a href="<?php
+          if (isset($_SESSION["customer_id"])) {
+              echo "cart.php";
+          } else {
+              echo "login.php";
+          }
+        ?>">
+        <i class="fa fa-shopping-cart"></i>
+      </a>
+      </div>
+
+      <button
+        id="hamburger"
+        aria-label="hamburger"
+        aria-haspopup="true"
+        aria-expanded="false"
+      >
+        <i class="bx bx-menu" aria-hidden="true"></i>
+      </button>
+    </div>
+  </div>
+</header>
