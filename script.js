@@ -64,14 +64,15 @@ document.addEventListener("keydown", (e) => {
 
 hamburgerBtn.addEventListener("click", toggleHamburger);
 
-var accordionItems = document.querySelectorAll('.accordion-item');
+const accordionItems = document.querySelectorAll('.accordion-item');
 
-accordionItems.forEach(function (item) {
-  item.addEventListener('click', function () {
+accordionItems.forEach( item => {
+  item.addEventListener('click', () => {
     var answer = item.querySelector('.ans');
     var isOpen = answer.style.maxHeight !== '0px';
 
     // Toggle the max-height property to show/hide the answer
     answer.style.maxHeight = isOpen ? '0px' : '20rem';
+    item.classList.toggle("active");
   });
 });

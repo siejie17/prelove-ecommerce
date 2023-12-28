@@ -1,5 +1,5 @@
-<?php 
-  session_start();
+<!DOCTYPE html>
+<?php
   include("conn.php");
 
   function getProfilePicture() {
@@ -32,7 +32,7 @@
       </a>
       <nav class="menu">
         <ul class="menu-bar">
-          <li><a class="nav-link" href="index.php">Home</a></li>
+          <li><a class="nav-link"id="navbar-link" href="index.php">Home</a></li>
           <li>
             <button
               class="nav-link dropdown-btn"
@@ -48,19 +48,19 @@
               <ul role="menu">
                 <li class="dropdown-title"> <span class="dropdown-link-title">Categories</span> </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=1&category=1">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=1&text=<?php echo urlencode("Men's Top"); ?>">
                     <img src="./assets/icons/men-top.png" width="17" height="22"/>
                     Men's Top
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=1&category=2">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=2&text=<?php echo urlencode("Men's Bottom"); ?>">
                     <img src="./assets/icons/men-bottom.png" width="17" height="22"/>
                     Men's bottom
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=1&category=8">
+                  <a class="dropdown-link" href="product-listing.php?type=1&category=8&text=<?php echo urlencode("Men's Shoes"); ?>">
                     <img src="./assets/icons/men-shoes.png" width="17" height="22"/>
                     Men's shoes
                   </a>
@@ -85,55 +85,55 @@
                   <span class="dropdown-link-title">Categories</span>
                 </li>
                 <li role="menuitem" class="menuItem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=1">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=1&text=<?php echo urlencode("Ladies' Top"); ?>">
                     <img src="./assets/icons/ladies-top.png" width="17" height="22"/>
                     Ladies' Top
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=2">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=2&text=<?php echo urlencode("Ladies' Bottom"); ?>">
                     <img src="./assets/icons/ladies-bottom.png" width="17" height="22"/>
                     Ladies' Bottom
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=3">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=3&text=<?php echo urlencode("Ladies' Sportwear"); ?>">
                     <img src="./assets/icons/ladies-sportwear.png" width="17" height="22"/>
                     Ladies' Sportwear
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=4">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=4&text=<?php echo urlencode("Dress"); ?>">
                     <img src="./assets/icons/ladies-dress.png" width="17" height="22"/>
                     Dress
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=5">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=5&text=<?php echo urlencode("Ladies' Blazer"); ?>">
                     <img src="./assets/icons/ladies-blazer.png" width="17" height="22"/>
                     Ladies' Blazer
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=6">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=6&text=<?php echo urlencode("Ladies' Jacket"); ?>">
                     <img src="./assets/icons/ladies-jacket.png" width="17" height="22"/>
                     Ladies' Jacket
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=7">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=7&text=<?php echo urlencode("Ladies' Hoodie"); ?>">
                     <img src="./assets/icons/ladies-hoodie.png" width="17" height="22"/>
                     Ladies' Hoodie
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=8">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=8&text=<?php echo urlencode("Ladies' Shoes"); ?>">
                     <img src="./assets/icons/ladies-shoes.png" width="17" height="22"/>
                     Ladies' Shoes
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=2&category=9">
+                  <a class="dropdown-link" href="product-listing.php?type=2&category=9&text=<?php echo urlencode("Ladies' Bag"); ?>">
                     <img src="./assets/icons/ladies-bag.png" width="17" height="22"/>
                     Ladies' Bag
                   </a>
@@ -156,19 +156,19 @@
               <ul role="menu">
                 <li class="dropdown-title"> <span class="dropdown-link-title">Categories</span> </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=3&category=10">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=10&text=<?php echo urlencode("Electronics"); ?>">
                     <img src="./assets/icons/electronics.png" width="17" height="22"/>
                     Electronics
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=3&category=11">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=11&text=<?php echo urlencode("Button Badge"); ?>">
                     <img src="./assets/icons/button-badge.png" width="17" height="22"/>
                     Button Badge
                   </a>
                 </li>
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=3&category=12">
+                  <a class="dropdown-link" href="product-listing.php?type=3&category=12&text=<?php echo urlencode("Authorized Album"); ?>">
                     <img src="./assets/icons/album.png" width="17" height="22"/>
                     Authorized Album
                   </a>
@@ -176,16 +176,16 @@
               </ul>
             </div>
           </li>
-          <li><a class="nav-link" href="requests.php">Requests</a></li>
-          <li><a class="nav-link" href="contact-us.php">Contact</a></li>
-          <li><a class="nav-link" href="testimonials.php">Testimonials</a></li>
-          <li><a class="nav-link" href="faqs.php">FAQs</a></li>
+          <li><a class="nav-link" id="navbar-link" href="requests.php">Requests</a></li>
+          <li><a class="nav-link" id="navbar-link" href="contact-us.php">Contact</a></li>
+          <li><a class="nav-link" id="navbar-link" href="testimonials.php">Testimonials</a></li>
+          <li><a class="nav-link" id="navbar-link" href="faqs.php">FAQs</a></li>
         </ul>
       </nav>
     </div>
     <div class="nav-end">
-      <div class="right-container">
-        <form class="search" role="search">
+      <div class="sright-container">
+        <form class="search" role="search" action="search.php" method="GET">
           <input type="search" name="search" placeholder="Search" />
           <i class="bx bx-search" aria-hidden="true"></i>
         </form>
@@ -209,7 +209,7 @@
               <div id="dropdown4" class="dropdown">
               <ul role="menu">
                 <li role="menuitem">
-                  <a class="dropdown-link" href="product-listing.php?type=3&category=10">
+                  <a class="dropdown-link" href="my-profile.php">
                     My Account
                   </a>
                 </li>
@@ -229,7 +229,7 @@
         <?php 
         } else {
         ?> 
-          <a href="login.php">
+          <a href="login.php" id="navbar-link">
             <?php echo $userProfilePicture; ?>
           </a>
         <?php  
@@ -242,7 +242,7 @@
               echo "login.php";
           }
         ?>">
-        <i class="fa fa-shopping-cart"></i>
+        <i class="fa fa-shopping-cart" id="navbar-link"></i>
       </a>
       </div>
 

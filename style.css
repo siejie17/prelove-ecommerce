@@ -23,7 +23,6 @@
 body {
   font-family: inherit;
   background-color: var(--white);
-  color: var(--dark-grey);
   letter-spacing: -0.4px;
 }
 
@@ -31,9 +30,9 @@ ul {
   list-style: none;
 }
 
-a {
+#navbar-link {
   text-decoration: none;
-  color: inherit;
+  color: black;
 }
 
 button {
@@ -68,7 +67,6 @@ button {
   border-bottom: 3px solid var(--border);
   height: 80px;
   width: 100%;
-  position: fixed;
   background-color: white;
 }
 
@@ -122,8 +120,8 @@ button {
 .nav-start,
 .nav-end,
 .menu-bar,
-.right-container,
-.right-container .search {
+.sright-container,
+.sright-container .search {
   display: flex;
   align-items: center;
 }
@@ -183,6 +181,8 @@ button {
   padding: 0.5rem 0;
   border-radius: 7px;
   transition: 0.1s ease-in-out;
+  text-decoration: none;
+  color: black;
 }
 
 .dropdown-link p {
@@ -190,17 +190,17 @@ button {
   color: var(--medium-grey);
 }
 
-.right-container {
+.sright-container {
   display: flex;
   align-items: center;
   column-gap: 1rem;
 }
 
-.right-container .search {
+.sright-container .search {
   position: relative;
 }
 
-.right-container img {
+.sright-container img {
   border-radius: 50%;
 }
 
@@ -246,9 +246,9 @@ button {
 
 .faqs-container {
   width: 100%;
-  max-width: 80rem;
+  max-width: 100rem;
   margin: 0 auto;
-  padding: 1rem 3rem;
+  padding: 1rem 2rem;
 }
 
 .accordion-item {
@@ -271,18 +271,14 @@ button {
 
 .accordion-link i {
   padding: .5rem;
-  transition: transform 0.3s;
-}
-
-.accordion-link .fa-chevron-up {
-  display: none;
+  transition: transform .5s ease-in;
 }
 
 .ans {
   max-height: 0;
   overflow: hidden;
   position: relative;
-  transition: max-height 650ms;
+  transition: max-height 350ms;
 }
 
 .ans::before {
@@ -305,21 +301,18 @@ button {
   max-height: 20rem;
 }
 
-.accordion-link:target .accordion-link i {
+.accordion-item.active i {
   transform: rotate(180deg);
 }
 
-.accordion-link:not(:target) i {
-  transform: rotate(0);
-}
-
 main {
-  padding: 30px 0;
+  min-height: 61.5vh;
 }
 
 .background-container {
   position: relative;
   height: 30vh;
+  padding: 70px 0 0 0;
 }
 
 .background-container img {
@@ -339,6 +332,131 @@ main {
   justify-content: center;
   height: 100%;
   color: black; /* Adjust text color to ensure readability */
+}
+
+/* Container styling */
+.testimonial-container {
+  margin: 20px;
+  padding: 33px 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  display: flex;
+  align-items: center;
+  height: auto;
+  max-width: 100%;
+}
+
+/* Left side styling */
+.customer-info {
+  flex: 1;
+  text-align: center;
+}
+
+.customer-info img {
+  width: 150px; /* Adjust the size as needed */
+  max-height:150px;
+  height: auto; /* Adjust the size as needed */
+  border-radius: 50%;
+}
+
+/* Right side styling */
+.testimonial-content {
+  flex: 2;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.testimonial-date {
+  font-weight: bold;
+  font-size: 16px;
+}
+
+.testimonial-separator {
+  padding: 20px 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+hr.dashed {
+  border-top: 2px dashed #bbb;
+  width: 100%;
+  height: 0;
+  max-width: 400px;
+  margin: 0;
+}
+
+.testimonial-review {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.testimonial-images img {
+  max-width: 100%; /* Ensure images don't exceed their container */
+  margin-top: 10px;
+  cursor: pointer;
+}
+
+/* Image modal styling */
+.modal {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal img {
+  max-width: 80%;
+  max-height: 80%;
+}
+
+.close-btn {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  color: #fff;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.image-container {
+  display: flex;
+  flex-direction: row;
+  max-width: 100px;
+  max-height: 150px;
+}
+
+.image-container img {
+  width: 100%;
+  height: 100%;
+  margin-top: 10px;
+  margin-right: 10px;
+  box-sizing: border-box;
+}
+
+.content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content to the top of the viewport */
+  height: 61vh;
+}
+
+.asterik {
+  color: red;
+}
+
+@media (max-width: 1202px) {
+  .testimonial-container {
+    flex-direction: column;
+    width: 100%;
+  }
 }
 
 @media (max-width: 1100px) {
