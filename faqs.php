@@ -1,13 +1,13 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/web-logo/Prelovebyjosie.ico" />
     <link rel="stylesheet" href="style.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <title>Frequent Asked Questions</title>
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"/>
+    <title>Frequent Asked Questions (FAQs)</title>
 </head>
 <body>
     <?php
@@ -18,7 +18,7 @@
         <div class="background-container">
             <img src="assets/images/bg.jpg" alt="Background Image">
             <div class="center-text">
-                <h1>Frequently Asked Questions (FAQs)</h1>
+                Frequently Asked Questions (FAQs)
             </div>
         </div>
         <section>

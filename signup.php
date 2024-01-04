@@ -1,8 +1,10 @@
+<?php session_start(); ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/web-logo/Prelovebyjosie.ico" />
     <link rel="stylesheet" href="style.css" />
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
@@ -149,11 +151,6 @@
     <?php
         include("navbar.php");
 
-        if (session_status() == PHP_SESSION_NONE) {
-            // Start a new session if no session is active
-            session_start();
-        }
-
         if($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["continue"])) {
 
             $first_name = sanitizeInput($_POST["first_name"]);
@@ -196,25 +193,25 @@
         <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
             <div class="input-fields">
                 <div>
-                    <label id="labels" for="first_name">First Name <span class="asterik">*</span></label>
+                    <label id="labels" for="first_name"><strong>First Name </strong><span class="asterik">*</span></label>
                     <input type="text" id="first_name" name="first_name" required>
                 </div>
                 <div>
-                    <label for="last_name">Last Name <span class="asterik">*</span></label>
+                    <label for="last_name"><strong>Last Name </strong><span class="asterik">*</span></label>
                     <input type="text" id="last_name" name="last_name" required>
                 </div>
                 <div>
-                    <label for="username">Username <span class="asterik">*</span></label>
+                    <label for="username"><strong>Username </strong><span class="asterik">*</span></label>
                     <input type="text" id="username" name="username" required>
                 </div>
                 <div>
-                    <label for="email_address">Email Address <span class="asterik">*</span></label>
-                    <input type="email" id="email_address" name="email_address" onkeyup="validateEmail(document.register.input4)" required>
+                    <label for="email_address"><strong>Email Address </strong><span class="asterik">*</span></label>
+                    <input type="email" id="email_address" name="email_address" onkeyup="validateEmail(this)" required>
                     <span id="er-email" style="margin-top: 10px;"></span>
                 </div>
                 <div>
                 <div class="pass-field">
-                    <label for="pw">Password <span class="asterik">*</span></label>
+                    <label for="pw"><strong>Password </strong><span class="asterik">*</span></label>
                     <input type="password" id="pw" name="pw" required>
                     <i class="fa-solid fa-eye"></i>
                 </div>
@@ -245,30 +242,30 @@
                 </div>
             </div>
                 <div>
-                    <label for="confirm_pw">Confirm Password <span class="asterik">*</span></label>
+                    <label for="confirm_pw"><strong>Confirm Password </strong><span class="asterik">*</span></label>
                     <input type="password" id="confirm_pw" name="confirm_pw" disabled required>
                     <div id="er-confirm-password"></div>
                 </div>
                 <div>
-                    <label for="phone_num">Phone Number <span class="asterik">*</span></label>
+                    <label for="phone_num"><strong>Phone Number </strong><span class="asterik">*</span></label>
                     <input type="tel" id="phone_num" name="phone_num" pattern="^(\+?6?01)[02-46-9]-*[0-9]{7}$|^(\+?6?01)[1]-*[0-9]{8}$" onkeyup="validatePhoneNumber()" required>
                     <small>(eg. +601XXXXXXXXX or 01XXXXXXXXX)</small>
                     <div id="phoneError"></div>
                 </div>
                 <div>
-                    <label for="shipping_address">Shipping Address <span class="asterik">*</span></label>
+                    <label for="shipping_address"><strong>Shipping Address </strong><span class="asterik">*</span></label>
                     <input type="text" id="shipping_address" name="shipping_address" required>
                 </div>
                 <div>
-                    <label for="postcode">Postcode <span class="asterik">*</span></label>
+                    <label for="postcode"><strong>Postcode </strong><span class="asterik">*</span></label>
                     <input type="text" id="postcode" name="postcode" required>
                 </div>
                 <div>
-                    <label for="city">City/District <span class="asterik">*</span></label>
+                    <label for="city"><strong>City/District </strong><span class="asterik">*</span></label>
                     <input type="text" id="city" name="city" required>
                 </div>
                 <div>
-                    <label for="state">State <span class="asterik">*</span></label>
+                    <label for="state"><strong>State </strong><span class="asterik">*</span></label>
                         <select id="state" name="state" required>
                         <option value="" disabled selected>Select a state</option>
                         <option value="Johor">Johor</option>
@@ -290,7 +287,7 @@
                     </select>
                 </div>
                 <div>
-                    <label for="country">Country <span class="asterik">*</span></label>
+                    <label for="country"><strong>Country </strong><span class="asterik">*</span></label>
                     <select id="country" name="country" required>
                         <option value="" disabled selected>Select a country</option>
                         <option value="Malaysia">Malaysia</option>
@@ -301,17 +298,13 @@
             <div class="terms">
                 <div class="notice">By clicking “continue”, you agree to our Terms and Privacy Policy.</div>
             </div>
-            <button type="submit" class="continue-button" name="continue">Continue</button>
+            <input type="submit" class="continue-button" name="continue" value="Continue">
         </form>
             <div class="terms">
                 Already got an account? <a href="login.php">Login</a>
             </div>
         </div>
     </main>
-
-    <?php 
-        include("footer.php");
-    ?>
 
     <script src="script.js"></script>
   <script>
@@ -375,15 +368,13 @@
      	var mailformat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
         var msg = document.getElementById("er-email");
         
-        if(inputEmail.value.match(mailformat))
-        {
-          msg.innerHTML = `<span style="margin-left: 5px;><i class="fas fa-check email-icon valid"></i></span> Valid email address!`;
-          msg.style.color = "green";
-        }
-        else
+        if(!inputEmail.value.match(mailformat))
         {
           msg.innerHTML = `<span style="margin-left: 5px;"><i class="fas fa-times email-icon invalid"></i></span> Invalid email address!`;
           msg.style.color = "red";
+        }
+        else {
+            msg.innerHTML = '';
         }
      }
      

@@ -4,6 +4,7 @@ const dropdown = document.querySelectorAll(".dropdown");
 const hamburgerBtn = document.getElementById("hamburger");
 const navMenu = document.querySelector(".menu");
 const links = document.querySelectorAll(".dropdown a");
+const accordionItems = document.querySelectorAll('.accordion-item');
 
 function setAriaExpandedFalse() {
   dropdownBtn.forEach((btn) => btn.setAttribute("aria-expanded", "false"));
@@ -15,6 +16,8 @@ function closeDropdownMenu() {
     drop.addEventListener("click", (e) => e.stopPropagation());
   });
 }
+
+hamburgerBtn.addEventListener("click", toggleHamburger);
 
 function toggleHamburger() {
   navMenu.classList.toggle("show");
@@ -62,17 +65,17 @@ document.addEventListener("keydown", (e) => {
   }
 });
 
-hamburgerBtn.addEventListener("click", toggleHamburger);
-
-const accordionItems = document.querySelectorAll('.accordion-item');
-
 accordionItems.forEach( item => {
   item.addEventListener('click', () => {
     var answer = item.querySelector('.ans');
-    var isOpen = answer.style.maxHeight !== '0px';
+    var isOpen = answer.style.maxHeight === '0px';
 
-    // Toggle the max-height property to show/hide the answer
-    answer.style.maxHeight = isOpen ? '0px' : '20rem';
-    item.classList.toggle("active");
+    if(isOpen === true) {
+      answer.style.maxHeight = '20rem';
+      item.classList.toggle("active");
+    } else {
+      answer.style.maxHeight = '0px';
+      item.classList.remove("active");
+    }
   });
 });

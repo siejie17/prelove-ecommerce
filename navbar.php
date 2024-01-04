@@ -21,10 +21,27 @@
     return '<i class="fa fa-user-circle-o" aria-hidden="true" style="font-size:30px;"></i>';
   }
 
+  function getCartNum($conn, $customer_id) {
+    $cartNumsql = "SELECT COUNT(*) AS cart_num FROM cart WHERE user_id = $customer_id";
+    $cartNumResult = mysqli_query($conn, $cartNumsql);
+
+    if ($cartNumResult && mysqli_num_rows($cartNumResult)) {
+      $row = mysqli_fetch_assoc($cartNumResult);
+      return $row['cart_num'];
+    }
+    return 0;
+  }
+
+  if(isset($_SESSION['customer_id'])) {
+    $countRow = getCartNum($conn, $_SESSION['customer_id']);
+  }
+  
   $userProfilePicture = getProfilePicture();
 ?>
 
-<header id="nav-menu" aria-label="navigation bar">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+  <header id="nav-menu" aria-label="navigation bar">
   <div class="container">
     <div class="nav-start">
       <a class="logo" href="index.php">
@@ -241,8 +258,13 @@
           } else {
               echo "login.php";
           }
-        ?>">
+        ?>" class="cart-overall">
         <i class="fa fa-shopping-cart" id="navbar-link"></i>
+        <?php
+          if (isset($_SESSION["customer_id"])) {
+              echo '<span id="cartCount">' . $countRow . '</span>';
+          }
+        ?>
       </a>
       </div>
 

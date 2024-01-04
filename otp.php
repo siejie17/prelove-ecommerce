@@ -1,13 +1,105 @@
+<?php
+    session_start();
+
+    include("conn.php");
+
+    if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["verify_otp"])) {
+        $otp1 = $_POST["otp1"];
+        $otp2 = $_POST["otp2"];
+        $otp3 = $_POST["otp3"];
+        $otp4 = $_POST["otp4"];
+        $otp5 = $_POST["otp5"];
+        $otp6 = $_POST["otp6"];
+    
+        $enteredOTP = $otp1 . $otp2 . $otp3 . $otp4 . $otp5 . $otp6;
+
+        if ($enteredOTP == $_SESSION['otp']) {
+            $firstName = $_SESSION["registration_data"]["first_name"];
+            $lastName = $_SESSION["registration_data"]["last_name"];
+            $username = $_SESSION["registration_data"]["username"];
+            $email = $_SESSION["registration_data"]["email"];
+            $password = $_SESSION["registration_data"]["password"];
+            $phone = $_SESSION["registration_data"]["phone"];
+            $address = $_SESSION["registration_data"]["shipping_address"];
+            $postcode = $_SESSION["registration_data"]["postcode"];
+            $city = $_SESSION["registration_data"]["city"];
+            $state = $_SESSION["registration_data"]["state"];
+            $country = $_SESSION["registration_data"]["country"];
+            $profile_pic = file_get_contents("assets/images/user.png");
+            $profile_pic = mysqli_real_escape_string($conn, $profile_pic);
+
+            $sql = "INSERT INTO customer (customer_email, customer_password, customer_profilePic, username, customer_firstName, customer_lastName, customer_phoneNum, customer_address, customer_postcode, customer_district, customer_state, customer_country)
+                VALUES ('$email', '$password', '$profile_pic', '$username', '$firstName', '$lastName', '$phone', '$address', '$postcode', '$city', '$state', '$country')";
+
+            if (mysqli_query($conn, $sql)) {
+                session_unset();
+                session_destroy();
+                echo '<script>alert("Account created successfully!");
+                    location.replace("login.php");</script>';
+            } else {
+                echo '<script>alert("Error creating account: ' . mysqli_error($conn) . '");</script>';
+            }
+        } else {
+            echo '<script>alert("Invalid OTP. Please try again.");</script>';
+        }
+    }
+
+    function otpGeneration() {
+        // Generate and send OTP through EmailJS
+        $otp = rand(100000, 999999);
+
+        $_SESSION['otp'] = $otp;
+
+        // Send OTP through EmailJS
+        echo '<script src="https://cdn.emailjs.com/dist/email.min.js"></script>';
+        echo '<script>';
+        echo 'emailjs.init("qlS0RDCH9l_vU1A5Q");';
+        echo 'var templateParams = {';
+        echo '  email_address: "' . $_SESSION["registration_data"]["email"] . '",';
+        echo '  verification_code: ' . $otp . ',';
+        echo '};';
+        echo 'emailjs.send("service_c0qw7oe", "template_1ueyo8a", templateParams)';
+        echo '.then(';
+        echo '  function(response) {';
+        echo '    console.log("Email sent successfully:", response);';
+        echo '  },';
+        echo '  function(error) {';
+        echo '    console.error("Email sending failed:", error);';
+        echo '  }';
+        echo ');';
+        echo '</script>';
+    }
+
+    if (!isset($_SESSION['otp']) || ($_SERVER["REQUEST_METHOD"] != "POST") || ($enteredOTP != $_SESSION['otp'])) {
+        $email = $_SESSION["registration_data"]["email"];
+        $checkSQL = "SELECT * FROM customer WHERE customer_email = ?";
+        $checkStmt = mysqli_prepare($conn, $checkSQL);
+        mysqli_stmt_bind_param($checkStmt, "s", $email);
+        mysqli_stmt_execute($checkStmt);
+        mysqli_stmt_store_result($checkStmt);
+    
+        if (mysqli_stmt_num_rows($checkStmt) == 0) {
+            otpGeneration();
+        } else {
+            session_unset();
+            session_destroy();
+            echo '<script>
+                alert("An account with this email already exists. Please log in.");
+                location.replace("login.php");
+              </script>';
+        }
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="image/x-icon" href="assets/web-logo/Prelovebyjosie.ico" />
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
     <title>OTP Verification</title>
     <style>
         .otp {
@@ -106,82 +198,12 @@
     </style>
 </head>
 <body>
-    <?php
-        session_start();
-
-        include("conn.php");
-
-        if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST["verify_otp"])) {
-            $otp1 = $_POST["otp1"];
-            $otp2 = $_POST["otp2"];
-            $otp3 = $_POST["otp3"];
-            $otp4 = $_POST["otp4"];
-            $otp5 = $_POST["otp5"];
-            $otp6 = $_POST["otp6"];
-        
-            $enteredOTP = $otp1 . $otp2 . $otp3 . $otp4 . $otp5 . $otp6;
-
-            if ($enteredOTP == $_SESSION['otp']) {
-                $firstName = $_SESSION["registration_data"]["first_name"];
-                $lastName = $_SESSION["registration_data"]["last_name"];
-                $username = $_SESSION["registration_data"]["username"];
-                $email = $_SESSION["registration_data"]["email"];
-                $password = $_SESSION["registration_data"]["password"];
-                $phone = $_SESSION["registration_data"]["phone"];
-                $address = $_SESSION["registration_data"]["shipping_address"];
-                $postcode = $_SESSION["registration_data"]["postcode"];
-                $city = $_SESSION["registration_data"]["city"];
-                $state = $_SESSION["registration_data"]["state"];
-                $country = $_SESSION["registration_data"]["country"];
-                $profile_pic = base64_encode(file_get_contents("assets/images/user.png"));
-
-                $sql = "INSERT INTO customer (customer_email, customer_password, customer_profilePic, username, customer_firstName, customer_lastName, customer_phoneNum, customer_address, customer_postcode, customer_district, customer_state, customer_country)
-                    VALUES ('$email', '$password', '$profile_pic', '$username', '$firstName', '$lastName', '$phone', '$address', '$postcode', '$city', '$state', '$country')";
-
-                if (mysqli_query($conn, $sql)) {
-                    echo '<div style="color: green;">Account created successfully!</div>';
-                } else {
-                    echo '<div style="color: red;">Error creating account: ' . mysqli_error($conn) . '</div>';
-                }
-            } else {
-                echo '<div style="color: red;">Invalid OTP. Please try again.</div>';
-            }
-            session_unset();
-            session_destroy();
-        }
-
-        if (!isset($_SESSION['otp']) || ($_SERVER["REQUEST_METHOD"] != "POST") || ($enteredOTP != $_SESSION['otp'])) {
-            // Generate and send OTP through EmailJS
-            $otp = rand(100000, 999999);
-    
-            // Store OTP in the session variable for validation
-            $_SESSION['otp'] = $otp;
-    
-            // Send OTP through EmailJS
-                echo '<script>';
-                echo 'emailjs.init("qlS0RDCH9l_vU1A5Q");';
-                echo 'var templateParams = {';
-                echo '  email_address: ' . $_SESSION["registration_data"]["email"] . ',';
-                echo '  verification_code: ' . $otp . ',';
-                echo '};';
-                echo 'emailjs.send("service_c0qw7oe", "template_1ueyo8a", templateParams)';
-                echo '.then(';
-                echo '  function(response) {';
-                echo '    console.log("Email sent successfully:", response);';
-                echo '  },';
-                echo '  function(error) {';
-                echo '    console.error("Email sending failed:", error);';
-                echo '  }';
-                echo ');';
-                echo '</script>';
-        }
-    ?>
     <div class="otp">
         <div class="otp-container">
             <header>
                 Verify Your Account
             </header>
-            <h5>We emailed you the six digit code to your registered email address.</h5>
+            <h5>We emailed you the six digit code to your email: <?php $_SESSION['registration_data']['email'] ?></h5>
             <h5>Please enter the code below to confirm your email address.</h5>
             <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <div class="otp-input-field">
@@ -194,7 +216,7 @@
                 </div>
                 <button class="otp-button" name="verify_otp">Verify OTP</button>
             </form>
-            <h5>Didn't Receive OTP? <a href="#">Resend</a></h5>
+            <!-- <h5>Didn't Receive OTP? <a href="#">Resend</a></h5> -->
         </div>
     </div>
 
