@@ -61,7 +61,7 @@
             color: #555555;
             padding: 10px 20px;
             border: none;
-            cursor: pointer;
+            cursor: default;
             font-weight: bold;
             width: 100%;
             height: 100%;

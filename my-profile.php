@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"/>
+    <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <title>My Profile</title>
     <style>
         .profile-container {
@@ -186,21 +187,6 @@
             color: white;
             border-radius: 5px;
         }
-
-        .small-button {
-            display: inline-block;
-            padding: 10px 20px;
-            margin-top: 10px;
-            background-color: rgba(184,142,47,0.25);
-            color: black;
-            text-decoration: none;
-            border-radius: 5px;
-            border: 1px solid black;
-            cursor: pointer;
-            width: 150px;
-            padding: 10px;
-            text-align: center;
-        }
     </style>
 </head>
 <body>
@@ -219,7 +205,7 @@
             <div class="background-container">
                 <img src="assets/images/bg.jpg" alt="Background Image">
                 <div class="center-text">
-                    <h1>My Account</h1>
+                    My Account
                 </div>
             </div>
             <div class="subtitle"><h3>Profile Information</h3></div>
@@ -229,12 +215,10 @@
                         <img class="profile-picture" src="data:image/jpeg;base64,' . base64_encode($profilePicture) . '" alt="Profile Picture">
                     </div>
                     <div class="button-section">
-                        <form method="post" action="editProfile.php" enctype="multipart/form-data">
-                            <div class="inline-upload">
-                                <label for="profile-pic-input" class="small-button">Edit Profile Pic</label>
-                                <input type="file" id="profile-pic-input" name="image" accept="image/*" style="display:none;">
-                                <button class="edit" type="submit" name="upload">Update</button>
-                            </div>
+                        <form method="post" action="editProfile.php" enctype="multipart/form-data" id="profile-pic-form">
+                            <label for="profile-pic-input" class="button">Edit Profile Pic</label>
+                            <input type="file" id="profile-pic-input" name="image" accept="image/*" style="display:none;" onchange="submitProfilePic()">
+                            <input type="submit" style="display: none;" id="hidden-submit">
                         </form>
                         <a class="button" id="full-button" href="#" onclick="openPersonalInfoForm()">Edit Personal Information</a>
                     </div>
@@ -366,27 +350,30 @@
     ?>
 
     <script>
+        function submitProfilePic() {
+            document.getElementById('profile-pic-form').submit();
+        }
 
-    function openPersonalInfoForm() {
-        document.getElementById('editFirstName').value = '<?php echo $row['customer_firstName']; ?>';
-        document.getElementById('editLastName').value = '<?php echo $row['customer_lastName']; ?>';
-        document.getElementById('editUsername').value = '<?php echo $row['username']; ?>';
-        document.getElementById('editEmail').value = '<?php echo $row['customer_email']; ?>';
-        document.getElementById('editPhoneNumber').value = '<?php echo $row['customer_phoneNum']; ?>';
-        document.getElementById('editShippingAddress').value = '<?php echo $row['customer_address']; ?>';
-        document.getElementById('editPostcode').value = '<?php echo $row['customer_postcode']; ?>';
-        document.getElementById('editCityDistrict').value = '<?php echo $row['customer_district']; ?>';
-        document.getElementById('editState').value = '<?php echo $row['customer_state']; ?>';
-        document.getElementById('editCountry').value = '<?php echo $row['customer_country']; ?>';
+        function openPersonalInfoForm() {
+            document.getElementById('editFirstName').value = '<?php echo $row['customer_firstName']; ?>';
+            document.getElementById('editLastName').value = '<?php echo $row['customer_lastName']; ?>';
+            document.getElementById('editUsername').value = '<?php echo $row['username']; ?>';
+            document.getElementById('editEmail').value = '<?php echo $row['customer_email']; ?>';
+            document.getElementById('editPhoneNumber').value = '<?php echo $row['customer_phoneNum']; ?>';
+            document.getElementById('editShippingAddress').value = '<?php echo $row['customer_address']; ?>';
+            document.getElementById('editPostcode').value = '<?php echo $row['customer_postcode']; ?>';
+            document.getElementById('editCityDistrict').value = '<?php echo $row['customer_district']; ?>';
+            document.getElementById('editState').value = '<?php echo $row['customer_state']; ?>';
+            document.getElementById('editCountry').value = '<?php echo $row['customer_country']; ?>';
 
-        // Display the modal
-        document.getElementById('editFormModal').style.display = 'block';
-    }
+            // Display the modal
+            document.getElementById('editFormModal').style.display = 'block';
+        }
 
-    function closeEditFormModal() {
-        // Close the modal
-        document.getElementById('editFormModal').style.display = 'none';
-    }
+        function closeEditFormModal() {
+            // Close the modal
+            document.getElementById('editFormModal').style.display = 'none';
+        }
     </script>
     <script src="script.js"></script>
 </body>

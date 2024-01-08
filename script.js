@@ -68,9 +68,9 @@ document.addEventListener("keydown", (e) => {
 accordionItems.forEach( item => {
   item.addEventListener('click', () => {
     var answer = item.querySelector('.ans');
-    var isOpen = answer.style.maxHeight === '0px';
+    var isOpen = item.classList.contains('active');
 
-    if(isOpen === true) {
+    if(isOpen !== true) {
       answer.style.maxHeight = '20rem';
       item.classList.toggle("active");
     } else {

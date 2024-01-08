@@ -15,6 +15,13 @@
         include('navbar.php');
     ?>
     <main>
+    <div class="background-container">
+        <img src="assets/images/bg.jpg" alt="Background Image">
+        <div class="center-text">
+            Testimonial
+        </div>
+    </div>
+
     <div class="content-wrapper">
         <?php
 
