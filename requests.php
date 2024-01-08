@@ -157,7 +157,7 @@
             width: 100%;
             height: 100%;
             background: rgba(0, 0, 0, 0.5);
-            z-index: 1;
+            z-index: 11;
         }
 
         .popup {
@@ -171,7 +171,7 @@
             padding: 20px;
             border-radius: 5px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
-            z-index: 2;
+            z-index: 12;
         }
 
         .popup-title {
@@ -377,7 +377,7 @@
             <div class="center-text">
                 Request
             </div>
-            <small class="title-description">You can request your beloved item to be selling on our site.</small>
+            <p><small class="title-description">You can request your beloved item to be selling on our site.</small></p>
         </div>
 
         <div class="request-content">
@@ -465,31 +465,34 @@
 
         <div class="current-request-content">
             <p class="current-requests-title">Current Request(s)</p>
-            <table style="width: 100%; border-collapse: collapse; border: 1px solid black;">
-                <thead>
-                    <tr style="border: 1px solid black; height: 50px; background-color: #C1B688; font-size: 18px;">
-                        <th style="border: 1px solid black; width: 160px;">Bil.</th>
-                        <th style="border: 1px solid black; width: 570px;">Request Item Name</th>
-                        <th style="border: 1px solid black;">Status</th>
-                        <th style="border: 1px solid black;">Action(s)</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <?php
-                    $imageArray = array();
-                    $bil = 1;
+            <?php
+                $imageArray = array();
+                $bil = 1;
 
-                    $query = "SELECT * FROM request WHERE customer_id = ?";
-                    $stmt = mysqli_prepare($conn, $query);
+                $query = "SELECT * FROM request WHERE customer_id = ?";
+                $stmt = mysqli_prepare($conn, $query);
 
-                    if ($stmt) {
-                        // Bind the parameter
-                        mysqli_stmt_bind_param($stmt, "i", $_SESSION['customer_id']);
+                if ($stmt) {
+                    // Bind the parameter
+                    mysqli_stmt_bind_param($stmt, "i", $_SESSION['customer_id']);
 
-                        // Execute the statement
-                        if(mysqli_stmt_execute($stmt) > 0) {
-                            // Get the result set
-                            $result = mysqli_stmt_get_result($stmt);
+                    // Execute the statement
+                    if (mysqli_stmt_execute($stmt)) {
+                        // Get the result set
+                        $result = mysqli_stmt_get_result($stmt);
+
+                        // Check if there are any rows in the result set
+                        if (mysqli_num_rows($result) > 0) {
+                            echo "<table style='width: 100%; border-collapse: collapse; border: 1px solid black;'>";
+                            echo "<thead>";
+                            echo "<tr style='border: 1px solid black; height: 50px; background-color: #C1B688; font-size: 18px;'>";
+                            echo "<th style='border: 1px solid black; width: 160px;'>Bil.</th>";
+                            echo "<th style='border: 1px solid black; width: 570px;'>Request Item Name</th>";
+                            echo "<th style='border: 1px solid black;'>Status</th>";
+                            echo "<th style='border: 1px solid black;'>Action(s)</th>";
+                            echo "</tr>";
+                            echo "</thead>";
+                            echo "<tbody>";
 
                             // Fetch rows as associative array
                             while ($row = mysqli_fetch_assoc($result)) {
@@ -497,7 +500,7 @@
                                 echo "<td style='border: 1px solid black;'>{$bil}</td>";
                                 echo "<td style='border: 1px solid black;'>{$row['request_name']}</td>";
                                 echo "<td style='border: 1px solid black;'>" . ucfirst($row['request_approval']) . "</td>";
-                                
+
                                 // Show different buttons based on the status
                                 echo "<td class='request-actions'>";
                                 echo "<button class='request-action-btn' id='view-action' name='view-btn' onclick='viewRequest(" . htmlspecialchars(json_encode($row)) . ")'>View</button>";
@@ -512,17 +515,21 @@
                                 echo "</tr>";
                                 $bil++;
                             }
-                            mysqli_stmt_close($stmt);
+
+                            echo "</tbody>";
+                            echo "</table>";
+                        } else {
+                            echo "<i>Seems like there are no active requests for selling items.</i>";
                         }
-                        else {
-                            echo "Seems like there are no active requests for selling items.";
-                        }
+
+                        mysqli_stmt_close($stmt);
                     } else {
-                        echo "Error in preparing statement: " . mysqli_error($conn);
+                        echo "Error in executing statement: " . mysqli_error($conn);
                     }
-                    ?>
-                </tbody>
-            </table>
+                } else {
+                    echo "Error in preparing statement: " . mysqli_error($conn);
+                }
+                ?>
         </div>
 
         <div id="view-request-popup" class="popup">
