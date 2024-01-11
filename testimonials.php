@@ -8,7 +8,45 @@
     <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" />
-    <title>Testimonial</title>
+    <title>Testimonials</title>
+    <style>
+        #myModal {
+            display: none;
+            position: fixed;
+            z-index: 11;
+            padding-top: 50px;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgb(0,0,0);
+            background-color: rgba(0,0,0,0.9);
+        }
+
+        /* Styles for the modal content */
+        #modal-image {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            display: block;
+            width: 480px;
+            height: 640px;
+            border-radius: 8px;
+        }
+
+        /* Styles for the close button */
+        .close {
+            color: white;
+            position: absolute;
+            top: 10px;
+            right: 25px;
+            font-size: 35px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+    </style>
 </head>
 <body>
     <?php
@@ -18,7 +56,7 @@
     <div class="background-container">
         <img src="assets/images/bg.jpg" alt="Background Image">
         <div class="center-text">
-            Testimonial
+            Testimonials
         </div>
     </div>
 
@@ -65,11 +103,35 @@
         // Close the database connection
         mysqli_close($conn);
         ?>
-    </div>
     </main>
+    </div>
+    <div id="myModal" class="modal">
+        <span class="close" onclick="closeModal()">&times;</span>
+        <img id="modal-image" src="" alt="Enlarged Image">
+    </div>
     <?php
         include('footer.php');
     ?>
     <script src="script.js"></script>
+    <script>
+    // JavaScript to handle modal opening and closing
+    function openModal(imageData) {
+        var modal = document.getElementById('myModal');
+        var modalImage = document.getElementById('modal-image');
+
+        // Set the source of the modal image
+        modalImage.src = imageData;
+
+        // Display the modal
+        modal.style.display = 'block';
+    }
+
+    function closeModal() {
+        var modal = document.getElementById('myModal');
+
+        // Hide the modal
+        modal.style.display = 'none';
+    }
+</script>
 </body>
 </html>

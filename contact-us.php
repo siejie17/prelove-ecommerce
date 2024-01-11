@@ -142,7 +142,7 @@
     .enlargeBusinessCard {
       display: none;
       position: fixed;
-      z-index: 1;
+      z-index: 11;
       left: 0;
       top: 0;
       width: 100%;
@@ -161,7 +161,7 @@
       cursor: pointer;
     }
   </style>
-  <title>Contact Form</title>
+  <title>Contact Us</title>
 </head>
 <body>
     <?php include("navbar.php"); ?>

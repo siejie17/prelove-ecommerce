@@ -203,7 +203,7 @@
             }
         }
     </style>
-    <title>PrelovebyJosie</title>
+    <title>PrelovebyJosie - Home</title>
 </head>
 <body>
     <?php include("navbar.php"); ?>
