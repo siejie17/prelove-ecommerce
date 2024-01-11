@@ -2,7 +2,7 @@
 <style>
   footer {
     background-color: #EEEEEE;
-    padding: 20px;
+    padding: 15px 100px;
     height: auto;
     color: black;
   }
@@ -153,17 +153,14 @@
                   My Cart
             </a>
           </div>
-          <div class="link"><a href="privacy-policies.php">Privacy Policies</a></div>
         </div>
       </div>
       <div class="footer-column" id="column">
         <!-- Content for the third column -->
-        <p class="payment-title">Payment Methods</p>
+        <p class="payment-title">Payment Method(s)</p>
           <!-- Payment Icons -->
           <div class="payment-icons">
-            <a href="#" title="Visa"><i class="fa fa-cc-visa"></i></a>
-            <a href="#" title="MasterCard"><i class="fa fa-cc-mastercard"></i></a>
-            <a href="#" title="PayPal"><i class="fa fa-cc-paypal"></i></a>
+            <h5>Manual Online Banking</h5>
           </div>
       </div>
     </div>
