@@ -139,7 +139,7 @@
           <div class="link"><a href="contact-us.php">Contact</a></div>
           <div class="link"><a href="testimonials.php">Testimonials</a></div>
           <div class="link">
-            <a href="<?= isset($_SESSION['customer_id']) ? 'profile.php' : 'login.php' ?>">
+            <a href="<?= isset($_SESSION['customer_id']) ? 'my-profile.php' : 'login.php' ?>">
                   My Profile
             </a>
           </div>
