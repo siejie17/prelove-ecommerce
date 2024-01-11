@@ -249,7 +249,7 @@
                         echo '<div class="l-product-container">
                                 <div class="l-product-list">
                                     <div class="l-product">
-                                        <a href="product.php?product_id=' .$product['product_id'] . '">
+                                        <a href="product_description.php?product_id=' .$product['product_id'] . '">
                                         <div class="index-image-container">
                                             <img src="data:image/jpeg;base64,' . base64_encode($product['product_image']) . '" alt="product images" class="product_img">
                                             <div class="index-overlay">
