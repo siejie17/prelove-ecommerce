@@ -1,0 +1,60 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Inter', sans-serif;
+}
+
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff; /* White background */
+  border-style: outset; /* Outset border style */
+  padding: 10px;
+  color: #333; /* Text color */
+  z-index: 1000; /* Ensure the header is on top of other elements */
+}
+
+.menu-toggle {
+  cursor: pointer;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+}
+
+.logo img {
+  margin-right: 10px; /* Adjust the spacing between the logo and text */
+  max-width: 100%;
+}
+
+.userinfo {
+  display: flex;
+  align-items: center;
+}
+
+.userinfo p {
+  margin: 0 10px;
+}
+
+.logout {
+  cursor: pointer;
+}
+
+/* Responsive styles */
+@media only screen and (max-width: 768px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .userinfo,
+  .logout {
+    margin-top: 10px;
+  }
+}
