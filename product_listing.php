@@ -8,10 +8,9 @@ include('conn.php');
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="search.css"/>
     <title>Browse product</title>
     <style>
@@ -52,7 +51,7 @@ include('conn.php');
             // $arr_keyword=explode(" ", $search_word); 
             // $sql="SELECT product.product_id,product.product_name, product.product_price, product_img.product_id, product_img.image FROM product JOIN product_img ON product.product_id= product_img.product_id WHERE ";
 
-            $sql="SELECT product.product_id, product.product_name, product.product_price, MIN(product_img.image) AS min_image FROM product JOIN product_img ON product.product_id = product_img.product_id JOIN `type` ON product.type_id=`type`.type_id JOIN category ON product.category_id = category.category_id WHERE product.type_id=$type AND product.category_id=$category";
+            $sql="SELECT product.product_id, product.product_name, product.product_price, MIN(product_img.image) AS min_image FROM product JOIN product_img ON product.product_id = product_img.product_id JOIN `type` ON product.type_id=`type`.type_id JOIN category ON product.category_id = category.category_id WHERE product.type_id=$type AND product.category_id=$category AND product.product_status='available'";
 
             // foreach($arr_keyword as $index=>$keyword){
             //     if($index>0){
@@ -153,7 +152,7 @@ include('conn.php');
         include("footer.php");
     ?>
 
-<script>
+    <script>
         <?php if (!empty($cart_message)) : ?>
             document.addEventListener('DOMContentLoaded',function(){
             const overlay = document.querySelector('#added-overlay');

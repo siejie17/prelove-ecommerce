@@ -9,7 +9,7 @@ if (isset($_SESSION['customer_id'])) {
 
     if (isset($_POST['product_id'])) {
         $product_id = mysqli_real_escape_string($conn, $_POST['product_id']);
-        $search_word=mysqli_real_escape_string($conn,$_POST['search_word']);
+        $search_word=urlencode(mysqli_real_escape_string($conn,$_POST['search_word']));
         // You may want to perform additional validation and security checks here.
 
         // Check if the product is already in the cart

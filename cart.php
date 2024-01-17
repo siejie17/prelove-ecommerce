@@ -9,111 +9,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style1.css" />
+    <link rel="stylesheet" href="style.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="search.css"/>
     <title>Cart</title>
     <style>
 
-.cart-container {
-    max-width: 1184px;
-    margin: 100px auto 20px auto;
-    /* padding: 10px; */
-    border: 1px solid #ddd;
-}
+        .cart-container {
+            max-width: 1184px;
+            margin: 100px auto 20px auto;
+            /* padding: 10px; */
+            border: 1px solid #ddd;
+        }
 
-.cart-header{
-    background-color:lightgrey;
-}
+        .cart-header{
+            background-color:lightgrey;
+        }
 
-.cart-header, .cart-item, .checkout-section {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #ddd;
-}
+        .cart-header, .cart-item, .checkout-section {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid #ddd;
+        }
 
-.cart-item {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-bottom: 10px;
-    }
+        .cart-item {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-bottom: 10px;
+            }
 
-.cart-item img {
-    max-width: 130px;
-    max-height: 200px;
-    margin-right:10px;
-}
+        .cart-item img {
+            max-width: 130px;
+            max-height: 200px;
+            margin-right:10px;
+        }
 
-.cart-header > div, .cart-item > div {
-        /* Set specific widths for each column */
-        flex: 1; /* Equal width for all columns */
-        max-width: 150px; /* Adjust the max-width as needed */
-        text-align: center; /* Center the text */
-    }
+        .cart-header > div, .cart-item > div {
+                /* Set specific widths for each column */
+                flex: 1; /* Equal width for all columns */
+                max-width: 150px; /* Adjust the max-width as needed */
+                text-align: center; /* Center the text */
+            }
 
-#checkoutBtn {
-    background-color: #4CAF50;
-    color: white;
-    padding: 10px;
-    cursor: pointer;
-    margin-right:10px;
-}
+        #checkoutBtn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px;
+            cursor: pointer;
+            margin-right:10px;
+        }
 
-.priceTitle{
-    margin-left:10px;
-}
+        .priceTitle{
+            margin-left:10px;
+        }
 
-.cart-item input[type="checkbox"] {
-        transform: scale(2); /* Adjust the scale factor as needed */
-    }
+        .cart-item input[type="checkbox"] {
+                transform: scale(2); /* Adjust the scale factor as needed */
+            }
 
-.extra-info{
-    text-align:center;
-    margin-bottom: 20px;
-}
-/* 
-.round label {
-  background-color: #fff;
-  border: 1px solid #ccc;
-  border-radius: 50%;
-  cursor: pointer;
-  height: 28px;
-  left: 0;
-  position: absolute;
-  top: 0;
-  width: 28px;
-}
+        .extra-info{
+            text-align:center;
+            margin-bottom: 20px;
+        }
 
-.round label:after {
-  border: 2px solid #fff;
-  border-top: none;
-  border-right: none;
-  content: "";
-  height: 6px;
-  left: 7px;
-  opacity: 0;
-  position: absolute;
-  top: 8px;
-  transform: rotate(-45deg);
-  width: 12px;
-}
-
-.round input[type="checkbox"] {
-  visibility: hidden;
-}
-
-.round input[type="checkbox"]:checked + label {
-  background-color: #66bb6a;
-  border-color: #66bb6a;
-}
-
-.round input[type="checkbox"]:checked + label:after {
-  opacity: 1; */ */
-/* } */
+        .error{
+            margin-top:10px;
+            text-align:center;
+            font-weight:bold;
+        }
 
     </style>
 </head>
@@ -152,23 +118,23 @@
                         $prices=(float)$row['product_price'];
                         $subtotal=$prices;
                         echo '<div class="cart-item" data-id="' . $row['product_id'] . '" data-name="' . $row['product_name'] . '" data-price="' . $row['product_price'] . '" data-weight="' . $row['product_weight'] . '" >';
-                        echo '<div class="round">';
-                        echo '<div><input type="checkbox" class="selectCheckbox" data-id="' . $row['product_id'] .'"data-price="'. $prices.'"  data-subtotal="'.$subtotal.'" data-weight="' . $row['product_weight'] . '" data-state="'.$row1['customer_state'].'"></div>';
-                        // echo '<label for="checkbox" '. $row['product_id'] . '"></label>';
-                        echo '</div>';
-                        echo '<div><img src="data:image/png;base64,'.base64_encode($row['min_image']) . '" alt="' . $row['product_name'] . '"></div>';
-                        echo '<div>' . $row['product_name'] . '</div>';
-                        echo '<div>' . $row['product_weight'] . '</div>';
-                        echo '<div>RM ' . $row['product_price'] . '</div>';
-                        echo '<div>' . '1'. '</div>';
-                        echo '<div>RM ' . $subtotal . '</div>';
-                        echo '<div><button class="removeBtn" data-id="'. $row['product_id'].'"><h1>-</h1></button></div>';
+                            echo '<div class="round">';
+                                echo '<div><input type="checkbox" class="selectCheckbox" data-id="' . $row['product_id'] .'"data-price="'. $prices.'"  data-subtotal="'.$subtotal.'" data-weight="' . $row['product_weight'] . '" data-state="'.$row1['customer_state'].'"></div>';
+                            // echo '<label for="checkbox" '. $row['product_id'] . '"></label>';
+                            echo '</div>';
+                            echo '<div><img src="data:image/png;base64,'.base64_encode($row['min_image']) . '" alt="' . $row['product_name'] . '"></div>';
+                            echo '<div>' . $row['product_name'] . '</div>';
+                            echo '<div>' . $row['product_weight'] . '</div>';
+                            echo '<div>RM ' . $row['product_price'] . '</div>';
+                            echo '<div>' . '1'. '</div>';
+                            echo '<div>RM ' . $subtotal . '</div>';
+                            echo '<div><button class="removeBtn" data-id="'. $row['product_id'].'"><h1>-</h1></button></div>';
                         echo '</div>';      
                         
                     }
                 }
 
-                else{echo'<div>There is no item in the cart</div>';}
+                else{echo'<div class="error">~~There is no item in the cart~~</div>';}
 
             }
         ?>
@@ -202,15 +168,15 @@
     </div>
 
     <div class="extra-info">
-        <h4>***Every item only has a quantity of 1</h4>
-        <a href="https://www.mycourier.my/jt-rate-jt-shipping-rate/" target="_blank">Shipping fee reference</div>
+        <h4>***Every item only has a quantity of 1***</h4>
+        <a href="https://www.mycourier.my/jt-rate-jt-shipping-rate/" target="_blank">Shipping fee reference</a>
     </div>
 
     <div id="added-overlay" class="added-overlay"></div>
 
     <div id="added-popup" class="added-popup">
         <p><?php echo $cart_message ?></p>
-        <button id="added-closePopup">Close</button>
+        <button id="added-closePopup">Contact seller to make payment</button>
     </div>
     <?php
         echo'</main>';
@@ -370,13 +336,26 @@
                 popup.style.display = 'none';
             }
 
+            function openWhatsApp(){
+                var customer_id="<?php echo urldecode($_GET['customerId']); ?>"
+                var orderId="<?php echo urldecode($_GET['orderId']);?>"
+                var total_price_rate="<?php echo urldecode($_GET['total']);?>"
+                // var encodedText=encodeURLComponent()
+                window.open("https://wa.me/+601112338281?text=Hi,+I+want+to+make+payment.%0AMy+Customer+Id:+" + customer_id + "+%0AMy+ order+Id:+" + orderId + "+%0AOrder+Total:+" + total_price_rate, "_blank");
+                // window.open("https://wa.me/+601112338281?text="+);
+            }
+
             // Event listener for the close button
-            closePopup.addEventListener('click', closePopupFunction);
+            closePopup.addEventListener('click', function(){
+                closePopupFunction();
+                openWhatsApp();
+            });
 
             // Event listener for clicking outside the popup to close it
             overlay.addEventListener('click', function (event) {
                 if (event.target === overlay) {
                     closePopupFunction();
+                    openWhatsApp();
                 }
             });
 
