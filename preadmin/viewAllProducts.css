@@ -1,0 +1,66 @@
+body {
+    font-family: 'Arial', sans-serif;
+}
+
+.container-fluid {
+    margin: 20px;
+}
+
+.table-header {
+    text-align: center;
+    margin-top: 30px;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+thead th, tbody td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+    max-width: 200px; /* Adjust the max-width as needed */
+}
+
+thead th {
+    background-color: #f2f2f2;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.card {
+    display: inline-block;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.card:hover {
+    background-color: #ddd;
+}
+
+.available {
+    color: green;
+}
+
+.unavailable {
+    color: red;
+}
+
+.material-symbols-outlined {
+    font-family: 'Material Symbols Outlined', sans-serif;
+    font-size: 24px;
+    vertical-align: middle;
+    margin-left: 5px;
+}
+
+.card p {
+    display: inline;
+    margin-right: 5px;
+    cursor: pointer;
+}
