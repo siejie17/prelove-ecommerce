@@ -2,8 +2,6 @@
 session_start();
 include('conn.php');
 
-// header('Content-Type: application/json; charset=utf-8');
-
 if (isset($_SESSION['customer_id'])) {
     $customer_id = mysqli_real_escape_string($conn, $_SESSION['customer_id']);
 
